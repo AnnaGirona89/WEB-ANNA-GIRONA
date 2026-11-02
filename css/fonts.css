@@ -1,0 +1,32 @@
+/*
+  Declaraciones @font-face para las tipografías compradas.
+  Los archivos no están versionados todavía: en cuanto se añadan en
+  /assets/fonts/ con estos nombres exactos, se cargarán automáticamente.
+  Mientras tanto, los fallbacks (serif itálica / monoespaciada del sistema)
+  mantienen proporciones y estilo similares.
+*/
+
+@font-face {
+  font-family: "Dominique Black Italic";
+  src:
+    url("../assets/fonts/DominiqueBlackItalic.woff2") format("woff2"),
+    url("../assets/fonts/DominiqueBlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mono 45 Headline";
+  src:
+    url("../assets/fonts/Mono45Headline.woff2") format("woff2"),
+    url("../assets/fonts/Mono45Headline.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: "Dominique Black Italic", "Bodoni Moda", "Times New Roman", serif;
+  --font-mono: "Mono 45 Headline", "IBM Plex Mono", "Courier New", monospace;
+}

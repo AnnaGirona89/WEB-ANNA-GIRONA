@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anna Girona — Creative Art Director</title>
+    <meta
+      name="description"
+      content="Portfolio de Anna Girona, Creative Art Director: branding, spot publicitario, campañas 360, branded content, social media y dirección de arte."
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="site-header__role">Creative Art Director</p>
+      <p class="site-header__tagline">
+        Dirección de arte para marcas y proyectos personales: branding, campañas
+        360º, branded content y contenido social.
+      </p>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <button type="button" class="nav-link is-active" data-view="trabajo">Trabajo</button>
+        <button type="button" class="nav-link" data-view="personal">Personal</button>
+        <button type="button" class="nav-link" data-view="about">About Me</button>
+      </nav>
+    </header>
+
+    <main class="content" id="content">
+      <!-- ===== Vista: Trabajo ===== -->
+      <section class="view view--trabajo" data-view-panel="trabajo">
+        <div class="view-controls" role="group" aria-label="Formato de visualización">
+          <button type="button" class="display-toggle is-active" data-display="grid">Grid</button>
+          <button type="button" class="display-toggle" data-display="list">Lista</button>
+        </div>
+
+        <div class="projects projects--grid" data-display-panel="grid"></div>
+        <div class="projects projects--list" data-display-panel="list" hidden></div>
+      </section>
+
+      <!-- ===== Vista: Personal ===== -->
+      <section class="view view--personal" data-view-panel="personal" hidden>
+        <div class="projects projects--grid"></div>
+      </section>
+
+      <!-- ===== Vista: About Me ===== -->
+      <section class="view view--about" data-view-panel="about" hidden>
+        <p class="about-text">
+          Anna Girona es directora de arte creativa especializada en branding,
+          campañas 360º, branded content y dirección de arte para publicidad y
+          contenido social.
+        </p>
+        <p class="about-text">
+          [Texto de presentación pendiente — se completará en una fase posterior.]
+        </p>
+      </section>
+
+      <!-- ===== Firma final, siempre al final del scroll ===== -->
+      <footer class="signature">
+        <h2 class="signature__name">Anna Girona</h2>
+      </footer>
+    </main>
+
+    <script src="js/projects.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
