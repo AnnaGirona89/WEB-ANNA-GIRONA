@@ -206,7 +206,7 @@ body{margin:0;background:#fdfcf8}a{color:#161616}a:hover{color:#8a8a8a}
       </sc-if>
       <sc-if value="{{ aboutNarrow }}">
         <main ref="{{ aboutRef }}" style="position:relative;z-index:1;display:flex;flex-direction:column;gap:40px;padding:calc(clamp(140px,10vw,200px) + 10px) 20px 46vh">
-          <canvas ref="{{ pixRef }}" role="img" aria-label="Retrato de Anna" style="position:sticky;top:calc(clamp(140px,10vw,200px) + 10px);z-index:2;width:100%;aspect-ratio:1200/1472;background:#c6cbcb;display:block"></canvas>
+          <canvas ref="{{ pixRef }}" role="img" aria-label="Retrato de Anna" style="position:sticky;top:calc(clamp(140px,10vw,200px) + 10px);z-index:2;width:100%;aspect-ratio:1/1;background:#c6cbcb;display:block"></canvas>
           <div ref="{{ aboutTxtRef }}" style="position:relative;z-index:1;width:76%;font-size:17px;line-height:1.15;font-family:'Dominique',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;letter-spacing:.005em;word-spacing:.02em;hyphens:none;color:#bdbdbd;text-wrap:pretty">
           <sc-for list="{{ aboutParas }}" as="para" hint-placeholder-count="4">
                 <p style="margin:0 0 1.05em">
@@ -352,11 +352,15 @@ class Component extends DCLogic {
     const cols = q >= 1 ? W : Math.max(14, Math.round(14 * Math.pow(W / 14, q * q)));
     if (cols === this.pq) return; this.pq = cols;
     const ctx = C.getContext('2d');
-    if (cols >= W * 0.5) { ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, 0, 0, W, H); return; }
-    if (!this.pixMid) { const m = document.createElement('canvas'); m.width = 300; m.height = Math.round(300 * img.naturalHeight / img.naturalWidth); const mc = m.getContext('2d'); mc.imageSmoothingQuality = 'high'; mc.drawImage(img, 0, 0, m.width, m.height); this.pixMid = m; }
-    const src = cols > 150 ? img : this.pixMid, rows = Math.max(1, Math.round(cols * H / W));
+    const iw = img.naturalWidth, ih = img.naturalHeight, srcRatio = iw / ih, dstRatio = W / H;
+    let fx = 0, fy = 0, fw = 1, fh = 1;
+    if (dstRatio > srcRatio) { fh = srcRatio / dstRatio; fy = (1 - fh) * 0.3; }
+    else if (dstRatio < srcRatio) { fw = dstRatio / srcRatio; fx = (1 - fw) / 2; }
+    if (cols >= W * 0.5) { ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, fx * iw, fy * ih, fw * iw, fh * ih, 0, 0, W, H); return; }
+    if (!this.pixMid) { const m = document.createElement('canvas'); m.width = 300; m.height = Math.round(300 * ih / iw); const mc = m.getContext('2d'); mc.imageSmoothingQuality = 'high'; mc.drawImage(img, 0, 0, m.width, m.height); this.pixMid = m; }
+    const src = cols > 150 ? img : this.pixMid, sW = src.naturalWidth || src.width, sH = src.naturalHeight || src.height, rows = Math.max(1, Math.round(cols * H / W));
     const s = this.pixS || (this.pixS = document.createElement('canvas')); s.width = cols; s.height = rows;
-    const sc = s.getContext('2d'); sc.imageSmoothingEnabled = true; sc.imageSmoothingQuality = 'high'; sc.drawImage(src, 0, 0, cols, rows);
+    const sc = s.getContext('2d'); sc.imageSmoothingEnabled = true; sc.imageSmoothingQuality = 'high'; sc.drawImage(src, fx * sW, fy * sH, fw * sW, fh * sH, 0, 0, cols, rows);
     ctx.imageSmoothingEnabled = false; ctx.drawImage(s, 0, 0, cols, rows, 0, 0, W, H);
   };
   aboutRev = (T, Cl, at, n0, n, key) => {
