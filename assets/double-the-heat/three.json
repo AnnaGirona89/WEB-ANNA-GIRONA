@@ -1,0 +1,42 @@
+{
+  "dimensionsMm": {
+    "width": 186,
+    "depth": 174.5,
+    "height": 83
+  },
+  "scale": 0.01,
+  "tilt": -0.82,
+  "camera": {
+    "fov": 28,
+    "position": [
+      0,
+      1.9,
+      8.6
+    ],
+    "lookAt": [
+      0,
+      1.2,
+      0
+    ]
+  },
+  "animation": {
+    "durationMs": 9000,
+    "easeBlend": 0.18,
+    "startRotationY": 0.35,
+    "direction": 1
+  },
+  "materials": {
+    "roughness": 0.72,
+    "clearcoat": 0.04,
+    "clearcoatRoughness": 0.8,
+    "bumpScale": 0.006
+  },
+  "textures": {
+    "top": "./assets/top.png?v=mv5jzb5f",
+    "front": "./assets/front.png?v=mv5jzb5f",
+    "back": "./assets/back.png?v=mv5jzb5f",
+    "left": "./assets/left.png?v=mv5jzb5f",
+    "right": "./assets/right.png?v=mv5jzb5f",
+    "bottom": "./assets/bottom.png?v=mv5jzb5f"
+  }
+}
