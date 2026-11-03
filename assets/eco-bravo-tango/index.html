@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eco Bravo Tango</title>
+<style>
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.st{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;perspective:1800px}
+.bk{position:relative;height:96%;aspect-ratio:3872/5184;transform-style:preserve-3d;will-change:transform}
+.f{position:absolute;inset:0;background:center/contain no-repeat;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fr{background-image:url(front.webp)}
+.ba{background-image:url(back.webp)}
+.ly{position:absolute;inset:0;background:url(front.webp) center/contain no-repeat;filter:brightness(.82) saturate(.9)}
+model-viewer{position:absolute;inset:0;width:100%;height:100%;background:transparent;--poster-color:transparent;--progress-bar-color:transparent}
+</style></head>
+<body>
+<div class="st" id="st"><div class="bk" id="bk"><div class="f fr"></div><div class="f ba"></div></div></div>
+<script>
+(function(){
+  function thick(){ var b=document.getElementById('bk'), T=b.offsetHeight*0.006, n=Math.max(4,Math.round(T/0.8));
+    b.querySelectorAll('.ly').forEach(function(e){e.remove()});
+    for(var i=1;i<n;i++){ var d=document.createElement('div'); d.className='ly'; d.style.transform='translateZ('+(T/2-i*T/n).toFixed(2)+'px)'; b.insertBefore(d,b.lastElementChild); }
+    b.querySelector('.fr').style.transform='translateZ('+(T/2).toFixed(2)+'px)';
+    b.querySelector('.ba').style.transform='rotateY(180deg) translateZ('+(T/2).toFixed(2)+'px)'; }
+  thick(); addEventListener('resize',thick);
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches, bk=document.getElementById('bk'), a=-25, t0=null, run=true;
+  function tick(t){ if(!run) return; if(t0!==null&&!rm) a+=(t-t0)/1000*28; t0=t;
+    bk.style.transform='rotateX(-8deg) rotateY('+a.toFixed(2)+'deg)'; requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+  // Si existe cover.glb, se usa el modelo real
+  fetch('cover.glb'+location.search,{method:'HEAD'}).then(function(r){ if(!r.ok) return;
+    var s=document.createElement('script'); s.type='module'; s.src='https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js';
+    s.onload=function(){ var mv=document.createElement('model-viewer');
+      mv.setAttribute('src','cover.glb'+location.search); mv.setAttribute('alt','Eco Bravo Tango, cubierta envuelta en malla roja');
+      if(!rm) mv.setAttribute('auto-rotate',''); mv.setAttribute('auto-rotate-delay','0'); mv.setAttribute('rotation-per-second','28deg');
+      mv.setAttribute('camera-orbit',(rm?'-25deg':'0deg')+' 82deg auto'); mv.setAttribute('interaction-prompt','none'); mv.setAttribute('shadow-intensity','0');
+      mv.addEventListener('load',function(){ run=false; document.getElementById('st').remove(); });
+      document.body.appendChild(mv); };
+    document.head.appendChild(s);
+  }).catch(function(){});
+})();
+</script>
+</body></html>
