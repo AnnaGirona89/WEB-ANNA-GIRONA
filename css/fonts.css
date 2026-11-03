@@ -1,18 +1,53 @@
 /*
   Declaraciones @font-face para las tipografías compradas.
-  Los archivos no están versionados todavía: en cuanto se añadan en
-  /assets/fonts/ con estos nombres exactos, se cargarán automáticamente.
-  Mientras tanto, los fallbacks (serif itálica / monoespaciada del sistema)
-  mantienen proporciones y estilo similares.
+
+  Familia "Dominique" (ya subida en /assets/fonts/): cuatro pesos/estilos
+  disponibles. El sitio usa el corte Black Italic (900, italic) para el
+  nombre y el menú — para usarlo hay que fijar font-weight:900 y
+  font-style:italic en la regla que consuma var(--font-display).
+
+  "Mono 45 Headline" (texto descriptivo del header y etiquetas) todavía no
+  se ha subido: mientras no exista, --font-mono cae a una monoespaciada del
+  sistema sin romper el layout.
 */
 
 @font-face {
-  font-family: "Dominique Black Italic";
-  src:
-    url("../assets/fonts/DominiqueBlackItalic.woff2") format("woff2"),
-    url("../assets/fonts/DominiqueBlackItalic.woff") format("woff");
+  font-family: "Dominique";
+  src: url("../assets/fonts/Dominique-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dominique";
+  src: url("../assets/fonts/Dominique-BlackItalic.otf") format("opentype");
   font-weight: 900;
   font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dominique";
+  src: url("../assets/fonts/Dominique-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dominique";
+  src: url("../assets/fonts/Dominique-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dominique";
+  src: url("../assets/fonts/Dominique-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -27,6 +62,6 @@
 }
 
 :root {
-  --font-display: "Dominique Black Italic", "Bodoni Moda", "Times New Roman", serif;
+  --font-display: "Dominique", "Bodoni Moda", "Times New Roman", serif;
   --font-mono: "Mono 45 Headline", "IBM Plex Mono", "Courier New", monospace;
 }

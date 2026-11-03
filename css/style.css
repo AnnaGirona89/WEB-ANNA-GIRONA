@@ -63,6 +63,7 @@ body {
 .nav-link {
   font-family: var(--font-display);
   font-size: 1.5rem;
+  font-weight: 900;
   font-style: italic;
   letter-spacing: 0.02em;
   color: var(--color-gray);
@@ -285,6 +286,7 @@ body {
 
 .signature__name {
   font-family: var(--font-display);
+  font-weight: 900;
   font-style: italic;
   font-size: clamp(4.5rem, 16vw, 15rem);
   line-height: 0.85;
