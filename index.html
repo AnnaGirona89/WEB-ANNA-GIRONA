@@ -436,7 +436,7 @@ class Component extends DCLogic {
       if (al > 0.5 && Math.abs(c - mid) < bd) { bd = Math.abs(c - mid); best = i; }
       if (!sp) return;
       if (i === s.activeRow) { sp.style.opacity = al.toFixed(3); }
-      else { sp.style.opacity = ''; const v = Math.round(255 * al); sp.style.color = `rgb(${v},${v},${v})`; }
+      else { sp.style.opacity = ''; const v = Math.round(189 * al); sp.style.color = `rgb(${v},${v},${v})`; }
     });
     const act = inWin ? under : coarse ? best : null;
     if (act !== s.activeRow) this.setState({ ...(act === null ? {} : { prevKey: T.children[act].dataset.key }), activeRow: act, act: act === null ? s.act : T.children[act].dataset.key, hover: act === null ? null : T.children[act].dataset.key });
